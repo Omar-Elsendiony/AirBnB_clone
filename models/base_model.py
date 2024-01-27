@@ -49,7 +49,8 @@ class BaseModel:
         self.__created_at = time
 
     def __str__(self):
-        return f'[{self.__class__.__name__}] ({self.id}) {self.refinedDictionary()}'
+        className = self.__class__.__name__
+        return f'[{className}] ({self.id}) {self.refinedDictionary()}'
 
     def save(self):
         self.updated_at = datetime.datetime.now()
