@@ -3,6 +3,7 @@ from typing import Any
 import uuid
 import datetime
 
+
 class BaseModel:
 
     def __init__(self, *args, **kwargs):
@@ -12,7 +13,8 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key != "__class__":
                     if key == "created_at" or key == "updated_at":
-                        dateValue = datetime.datetime.strptime(value, datetimeFormat)
+                        dateValue = datetime.datetime.\
+                            strptime(value, datetimeFormat)
                         setattr(self, "__" + key, dateValue)
                     else:
                         setattr(self, "__" + key, value)
@@ -41,7 +43,7 @@ class BaseModel:
     @property
     def created_at(self):
         return self.__updated_at
-    
+
     @created_at.setter
     def created_at(self, time):
         self.__created_at = time
@@ -54,14 +56,14 @@ class BaseModel:
 
     def to_dict(self):
         oldDictionary = self.__dict__
-        dictionaryToBeReturned = {}
+        d1 = {}
 
-        dictionaryToBeReturned.update({"my_number": oldDictionary.get("my_number")})
-        dictionaryToBeReturned.update({"name": oldDictionary.get("name")})
-        dictionaryToBeReturned.update({"class": self.__class__.__name__})
-        dictionaryToBeReturned.update({"created_at": datetime.datetime.isoformat(self.created_at)})
-        dictionaryToBeReturned.update({"updated_at": datetime.datetime.isoformat(self.updated_at)})
-        return dictionaryToBeReturned
+        d1.update({"my_number": oldDictionary.get("my_number")})
+        d1.update({"name": oldDictionary.get("name")})
+        d1.update({"class": self.__class__.__name__})
+        d1.update({"created_at": datetime.datetime.isoformat(self.created_at)})
+        d1.update({"updated_at": datetime.datetime.isoformat(self.updated_at)})
+        return d1
 
 # b = BaseModel()
 # b.__str__()
