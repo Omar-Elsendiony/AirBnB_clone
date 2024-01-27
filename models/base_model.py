@@ -24,29 +24,21 @@ class BaseModel:
             self.created_at = todayDate
             self.updated_at = todayDate
 
-    @property
-    def id(self):
-        return self.__id
+    # @property
+    # def updated_at(self):
+    #     return self.updated_at
 
-    @id.setter
-    def id(self, id):
-        self.__id = id
+    # @updated_at.setter
+    # def updated_at(self, time):
+    #     self.updated_at = time
 
-    @property
-    def updated_at(self):
-        return self.__updated_at
+    # @property
+    # def created_at(self):
+    #     return self.updated_at
 
-    @updated_at.setter
-    def updated_at(self, time):
-        self.__updated_at = time
-
-    @property
-    def created_at(self):
-        return self.__updated_at
-
-    @created_at.setter
-    def created_at(self, time):
-        self.__created_at = time
+    # @created_at.setter
+    # def created_at(self, time):
+    #     self.created_at = time
 
     def __str__(self):
         className = self.__class__.__name__
@@ -58,13 +50,13 @@ class BaseModel:
     def refinedDictionary(self):
         oldDictionary = self.__dict__
         className = self.__class__.__name__
-        d1 = {}
+        d1 = oldDictionary
 
-        d1.update({"my_number": oldDictionary.get("my_number")})
-        d1.update({"name": oldDictionary.get("name")})
-        d1.update({"updated_at": datetime.datetime.isoformat(self.updated_at)})
-        d1.update({"id": oldDictionary.get("_{}__id".format(className))})
-        d1.update({"created_at": datetime.datetime.isoformat(self.created_at)})
+        # d1.update({"my_number": oldDictionary.get("my_number")})
+        # d1.update({"name": oldDictionary.get("name")})
+        # d1.update({"updated_at": self.updated_at.isoformat()})
+        # d1.update({"id": oldDictionary.get("_{}id".format(className))})
+        # d1.update({"created_at": self.created_at.isoformat()})
         return d1
 
     def to_dict(self):
@@ -75,9 +67,9 @@ class BaseModel:
         d1.update({"my_number": oldDictionary.get("my_number")})
         d1.update({"name": oldDictionary.get("name")})
         d1.update({"__class__": className})
-        d1.update({"updated_at": datetime.datetime.isoformat(self.updated_at)})
-        d1.update({"id": oldDictionary.get("_{}__id".format(className))})
-        d1.update({"created_at": datetime.datetime.isoformat(self.created_at)})
+        d1.update({"updated_at": self.updated_at.isoformat()})
+        d1.update({"id": oldDictionary.get("id")})
+        d1.update({"created_at": self.created_at.isoformat()})
         return d1
 
 # b = BaseModel()
