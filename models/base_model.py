@@ -21,8 +21,8 @@ class BaseModel:
         else:
             self.id = str(uuid.uuid4())
             todayDate = datetime.datetime.now()
-            self.created_at = todayDate.isoformat()
-            self.updated_at = todayDate.isoformat()
+            self.created_at = todayDate
+            self.updated_at = todayDate
 
     @property
     def id(self):
@@ -49,10 +49,22 @@ class BaseModel:
         self.__created_at = time
 
     def __str__(self):
-        return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
+        return f'[{self.__class__.__name__}] ({self.id}) {self.refinedDictionary()}'
 
     def save(self):
         self.updated_at = datetime.datetime.now()
+
+    def refinedDictionary(self):
+        oldDictionary = self.__dict__
+        className = self.__class__.__name__
+        d1 = {}
+
+        d1.update({"my_number": oldDictionary.get("my_number")})
+        d1.update({"name": oldDictionary.get("name")})
+        d1.update({"updated_at": datetime.datetime.isoformat(self.updated_at)})
+        d1.update({"id": oldDictionary.get("_{}__id".format(className))})
+        d1.update({"created_at": datetime.datetime.isoformat(self.created_at)})
+        return d1
 
     def to_dict(self):
         oldDictionary = self.__dict__
