@@ -56,13 +56,15 @@ class BaseModel:
 
     def to_dict(self):
         oldDictionary = self.__dict__
+        className = self.__class__.__name__
         d1 = {}
 
         d1.update({"my_number": oldDictionary.get("my_number")})
         d1.update({"name": oldDictionary.get("name")})
-        d1.update({"class": self.__class__.__name__})
-        d1.update({"created_at": datetime.datetime.isoformat(self.created_at)})
+        d1.update({"__class__": className})
         d1.update({"updated_at": datetime.datetime.isoformat(self.updated_at)})
+        d1.update({"id": oldDictionary.get("_{}__id".format(className))})
+        d1.update({"created_at": datetime.datetime.isoformat(self.created_at)})
         return d1
 
 # b = BaseModel()
