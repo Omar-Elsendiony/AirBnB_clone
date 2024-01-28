@@ -26,49 +26,24 @@ class BaseModel:
                         setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
-            todayDate = datetime.datetime.now()
+            todayDate = datetime.datetime.now().isoformat()
             self.created_at = todayDate
             self.updated_at = todayDate
             storage.new(self)
 
-    # @property
-    # def updated_at(self):
-    #     return self.updated_at
-
-    # @updated_at.setter
-    # def updated_at(self, time):
-    #     self.updated_at = time
-
-    # @property
-    # def created_at(self):
-    #     return self.updated_at
-
-    # @created_at.setter
-    # def created_at(self, time):
-    #     self.created_at = time
 
     def __str__(self):
         className = self.__class__.__name__
         return f'[{className}] ({self.id}) {self.__dict__}'
 
     def save(self):
-        self.updated_at = datetime.datetime.now()
+        self.updated_at = datetime.datetime.now().isoformat()
         storage.save()
 
 
     def to_dict(self):
-        oldDictionary = self.__dict__
-        className = self.__class__.__name__
         d1 = {}
-
-        d1.update({"my_number": oldDictionary.get("my_number")})
-        d1.update({"name": oldDictionary.get("name")})
-        d1.update({"__class__": className})
-        d1.update({"updated_at": self.updated_at.isoformat()})
-        d1.update({"id": oldDictionary.get("id")})
-        d1.update({"created_at": self.created_at.isoformat()})
+        d1.update(self.__dict__)
+        d1.update({"__class__": self.__class__.__name__})
         return d1
 
-# b = BaseModel()
-# b.__str__()
-# print(b.to_dict())
