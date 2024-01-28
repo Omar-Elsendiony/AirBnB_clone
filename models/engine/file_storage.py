@@ -27,7 +27,7 @@ class FileStorage:
     def save(self):
         try:
             with open(self.__file_path, "w+") as outfile:
-                json.dump(self.__objects, outfile)
+                json.dump(self.__objects, outfile, indent=4, sort_keys=True, default=str)
         except FileNotFoundError:
             # print(f"File '{self.__file_path}' not found.")
             pass

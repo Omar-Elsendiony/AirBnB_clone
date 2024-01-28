@@ -26,7 +26,7 @@ class BaseModel:
                         setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
-            todayDate = datetime.datetime.now().isoformat()
+            todayDate = datetime.datetime.now()
             self.created_at = todayDate
             self.updated_at = todayDate
             storage.new(self)
@@ -37,13 +37,16 @@ class BaseModel:
         return f'[{className}] ({self.id}) {self.__dict__}'
 
     def save(self):
-        self.updated_at = datetime.datetime.now().isoformat()
+        self.updated_at = datetime.datetime.now()
         storage.save()
 
 
     def to_dict(self):
+        oldDictionary = self.__dict__
         d1 = {}
-        d1.update(self.__dict__)
+        d1.update(oldDictionary)
+        d1["created_at"] = d1["created_at"].isoformat()
+        d1["updated_at"] = d1["updated_at"].isoformat()
         d1.update({"__class__": self.__class__.__name__})
         return d1
 
