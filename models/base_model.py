@@ -5,6 +5,8 @@
 from typing import Any
 import uuid
 import datetime
+from __init__ import storage
+
 
 class BaseModel:
     """
@@ -19,14 +21,15 @@ class BaseModel:
                     if key == "created_at" or key == "updated_at":
                         dateValue = datetime.datetime.\
                             strptime(value, datetimeFormat)
-                        setattr(self, "__" + key, dateValue)
+                        setattr(self, key, dateValue)
                     else:
-                        setattr(self, "__" + key, value)
+                        setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
             todayDate = datetime.datetime.now()
             self.created_at = todayDate
             self.updated_at = todayDate
+            storage.new(self)
 
     # @property
     # def updated_at(self):
@@ -46,22 +49,12 @@ class BaseModel:
 
     def __str__(self):
         className = self.__class__.__name__
-        return f'[{className}] ({self.id}) {self.refinedDictionary()}'
+        return f'[{className}] ({self.id}) {self.__dict__}'
 
     def save(self):
         self.updated_at = datetime.datetime.now()
+        storage.save()
 
-    def refinedDictionary(self):
-        oldDictionary = self.__dict__
-        className = self.__class__.__name__
-        d1 = oldDictionary
-
-        # d1.update({"my_number": oldDictionary.get("my_number")})
-        # d1.update({"name": oldDictionary.get("name")})
-        # d1.update({"updated_at": self.updated_at.isoformat()})
-        # d1.update({"id": oldDictionary.get("_{}id".format(className))})
-        # d1.update({"created_at": self.created_at.isoformat()})
-        return d1
 
     def to_dict(self):
         oldDictionary = self.__dict__
