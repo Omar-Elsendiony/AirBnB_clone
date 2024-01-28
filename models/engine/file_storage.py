@@ -4,8 +4,8 @@ import uuid
 import datetime
 
 class FileStorage:
-    def __init__(self, filepath) -> None:
-        self.__file_path = filepath
+    def __init__(self) -> None:
+        self.__file_path = "file.json"
         self.__objects = {}
 
     def all(self):
