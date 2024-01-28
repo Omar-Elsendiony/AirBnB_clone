@@ -18,15 +18,11 @@ class test_BaseModel(unittest.TestCase):
       b.save()
 
   def test_to_dict(self):
-      self.assertTrue('FOO'.isupper())
-      self.assertFalse('Foo'.isupper())
+        b = BaseModel()
+        d = b.to_dict()
+        self.assertIsInstance(d, dict)
 
-#   def test_split(self):
-#       s = 'hello world'
-#       self.assertEqual(s.split(), ['hello', 'world'])
-#       # check that s.split fails when the separator is not a string
-#       with self.assertRaises(TypeError):
-#           s.split(2)
+
 
 if __name__ == '__main__':
     unittest.main()
