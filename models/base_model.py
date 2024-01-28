@@ -1,11 +1,15 @@
 #!/usr/bin/python3
+"""
+    base model module
+"""
 from typing import Any
 import uuid
 import datetime
 
-
 class BaseModel:
-
+    """
+     class base model which is the fundamental class for nosr of the logic
+    """
     def __init__(self, *args, **kwargs):
         # self.updated_at = None
         if (kwargs):
