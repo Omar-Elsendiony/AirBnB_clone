@@ -14,8 +14,10 @@ class FileStorage:
     def new(self, obj):
         if (obj is not None):
             className = obj.__class__.__name__
+            storeDict = obj.__dict__
+            storeDict.update({"__class__": className})
             if (obj.id):
-                self.__objects[className + "." + obj.id] = obj.to_dict()
+                self.__objects[className + "." + obj.id] = storeDict
             else:
                 raise AttributeError("object does not have id attribute")
         else:
