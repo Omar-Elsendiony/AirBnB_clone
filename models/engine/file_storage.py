@@ -15,7 +15,7 @@ class FileStorage:
         if (obj is not None):
             className = obj.__class__.__name__
             if (obj.id):
-                self.__objects[className + obj.id] = obj.to_dict()
+                self.__objects[className + "." + obj.id] = obj.to_dict()
             else:
                 raise AttributeError("object does not have id attribute")
         else:
@@ -24,7 +24,7 @@ class FileStorage:
 
     def save(self):
         try:
-            with open(self.__file_path, "a") as outfile:
+            with open(self.__file_path, "w+") as outfile:
                 json.dump(self.__objects, outfile)
         except FileNotFoundError:
             # print(f"File '{self.__file_path}' not found.")
@@ -33,6 +33,6 @@ class FileStorage:
     def reload(self):
         try:
             with open(self.__file_path, "r") as file:
-                s = json.load(file)
+                self.__objects = json.load(file)
         except Exception as E:
             pass

@@ -7,5 +7,5 @@ sys.path.append(path)
 from engine.file_storage import FileStorage
 
 
-storage = FileStorage("file.json")
+storage = FileStorage(current + "/file.json")
 storage.reload()
