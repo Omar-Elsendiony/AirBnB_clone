@@ -2,11 +2,10 @@
 """
     base model module
 """
+import models
 from typing import Any
 import uuid
 import datetime
-from __init__ import storage
-
 
 class BaseModel:
     """
@@ -29,7 +28,7 @@ class BaseModel:
             todayDate = datetime.datetime.now()
             self.created_at = todayDate
             self.updated_at = todayDate
-            storage.new(self)
+            models.storage.new(self)
 
 
     def __str__(self):
@@ -38,7 +37,7 @@ class BaseModel:
 
     def save(self):
         self.updated_at = datetime.datetime.now()
-        storage.save()
+        models.storage.save()
 
 
     def to_dict(self):

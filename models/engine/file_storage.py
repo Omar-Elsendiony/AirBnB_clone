@@ -1,7 +1,12 @@
 #!/usr/bin/python3
 import json
-import uuid
-import datetime
+import os
+import sys
+# current = os.path.dirname(os.path.realpath(__file__))
+# parent = os.path.dirname(current)
+# sys.path.append(parent)
+from models.base_model import BaseModel
+
 
 class FileStorage:
     def __init__(self) -> None:
@@ -14,10 +19,11 @@ class FileStorage:
     def new(self, obj):
         if (obj is not None):
             className = obj.__class__.__name__
-            storeDict = obj.__dict__
-            storeDict.update({"__class__": className})
+            # storeDict = obj.__dict__
+            # storeDict.update({"__class__": className})
+            storeDict = obj.to_dict()
             if (obj.id):
-                self.__objects[className + "." + obj.id] = storeDict
+                self.__objects[className + "." + obj.id] = obj
             else:
                 raise AttributeError("object does not have id attribute")
         else:
@@ -26,15 +32,23 @@ class FileStorage:
 
     def save(self):
         try:
-            with open(self.__file_path, "w+") as outfile:
-                json.dump(self.__objects, outfile, indent=4, sort_keys=True, default=str)
+            dictObj = {}
+            for objID, objVal in self.__objects.items():
+                dictObj[objID] = objVal.to_dict()
+            with open(self.__file_path, "w") as outfile:
+                json.dump(dictObj, outfile)
         except FileNotFoundError:
             # print(f"File '{self.__file_path}' not found.")
             pass
     
     def reload(self):
-        try:
+
+        try:     
             with open(self.__file_path, "r") as file:
-                self.__objects = json.load(file)
+                dictionaries = json.load(file)
+                # for key, value in dictionaries.items():
+                #     classname = key.split('.')[0]
+                self.__objects = dictionaries
+                    
         except Exception as E:
             pass
