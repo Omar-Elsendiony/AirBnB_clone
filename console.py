@@ -1,3 +1,6 @@
+"""
+console module starts a console that takes user inputs by providing a prompt that waits for the input
+"""
 import cmd
 
 
