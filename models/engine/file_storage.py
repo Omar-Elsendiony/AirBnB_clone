@@ -21,7 +21,7 @@ class FileStorage:
             className = obj.__class__.__name__
             # storeDict = obj.__dict__
             # storeDict.update({"__class__": className})
-            storeDict = obj.to_dict()
+            # storeDict = obj.to_dict()
             if (obj.id):
                 self.__objects[className + "." + obj.id] = obj
             else:
@@ -42,13 +42,14 @@ class FileStorage:
             pass
     
     def reload(self):
-
         try:     
             with open(self.__file_path, "r") as file:
                 dictionaries = json.load(file)
-                # for key, value in dictionaries.items():
-                #     classname = key.split('.')[0]
-                self.__objects = dictionaries
-                    
+                for key, value in dictionaries.items():
+                    split_ = key.split('.')
+                    classname = split_[0]
+                    id_ = split_[1]
+                    self.__objects[classname + "." + id_] = globals()[classname](**value)
+
         except Exception as E:
             pass
