@@ -15,7 +15,7 @@ class FileStorage:
 
     def all(self):
         return self.__objects
-    
+
     def new(self, obj):
         if (obj is not None):
             className = obj.__class__.__name__
@@ -28,7 +28,6 @@ class FileStorage:
                 raise AttributeError("object does not have id attribute")
         else:
             raise TypeError("object can not be None")
-        
 
     def save(self):
         try:
@@ -40,16 +39,16 @@ class FileStorage:
         except FileNotFoundError:
             # print(f"File '{self.__file_path}' not found.")
             pass
-    
+
     def reload(self):
-        try:     
+        try:
             with open(self.__file_path, "r") as file:
                 dictionaries = json.load(file)
                 for key, value in dictionaries.items():
                     split_ = key.split('.')
                     classname = split_[0]
                     id_ = split_[1]
-                    self.__objects[classname + "." + id_] = globals()[classname](**value)
-
+                    self.__objects[classname + "." + id_] = \
+                        globals()[classname](**value)
         except Exception as E:
             pass
