@@ -17,6 +17,7 @@ class HBNBCommand(cmd.Cmd):
         """creates a new instance of the class with the provided name"""
         parsed_line = parse(line)
         try:
+            print("me")
             if (len(parsed_line) == 0):
                 print("** class name missing **")
             else:
@@ -37,10 +38,10 @@ class HBNBCommand(cmd.Cmd):
             if (len(parsed_line) == 0):
                 print("** class name missing **")
             elif (len(parsed_line) < 2):
-                instance = globals()[(eval(parsed_line[0]))]()
+                instance = globals()[(parsed_line[0])]()
                 print("** instance id missing **")
             else:
-                className = eval(parsed_line[0])
+                className = parsed_line[0]
                 id = (parsed_line[1])
                 fs = FileStorage()
                 fs.reload()
@@ -61,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
             if (len(parsed_line) == 0):
                 print("** class name missing **")
             elif (len(parsed_line) < 2):
-                instance = globals()[eval(parsed_line[0])]()
+                instance = globals()[parsed_line[0]]()
                 print("** instance id missing **")
             else:
                 className = parsed_line[0]
@@ -69,7 +70,7 @@ class HBNBCommand(cmd.Cmd):
                 fs = FileStorage()
                 fs.reload()
                 all_reloaded = fs.all()
-                # instance = globals()[eval(parsed_line[0])]()
+                # instance = globals()[parsed_line[0]]()
                 obj_reloaded = all_reloaded.\
                     get("{}.{}".format(className, id))
                 if (obj_reloaded is None):
@@ -86,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
             if (len(parsed_line) == 0):
                 print("** class name missing **")
             else:
-                className = eval(parsed_line[0])
+                className = parsed_line[0]
                 fs = FileStorage()
                 fs.reload()
                 all_reloaded = fs.all()
@@ -106,10 +107,10 @@ class HBNBCommand(cmd.Cmd):
             if (len(parsed_line) == 0):
                 print("** class name missing **")
             elif (len(parsed_line) < 2):
-                instance = globals()[eval(parsed_line[0])]()
+                instance = globals()[parsed_line[0]]()
                 print("** instance id missing **")
             else:
-                className = eval(parsed_line[0])
+                className = parsed_line[0]
                 id = parsed_line[1]
                 fs = FileStorage()
                 fs.reload()
