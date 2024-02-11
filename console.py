@@ -15,11 +15,12 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, line):
         """creates a new instance of the class with the provided name"""
-        parsed_str = parse(line)
+        parsed_line = parse(line)
         try:
-            if (len(parsed_str) == 0):
+            if (len(parsed_line) == 0):
                 print("** class name missing **")
             else:
+                className = eval(parsed_line[0])
                 className = eval(className)
                 if (className == ""): print("** class name missing **")
                 else:
@@ -37,11 +38,11 @@ class HBNBCommand(cmd.Cmd):
             if (len(parsed_line) == 0):
                 print("** class name missing **")
             elif (len(parsed_line) <= 2):
-                instance = globals()[eval(eval(parsed_line[0]))]()
+                instance = globals()[(eval(parsed_line[0]))]()
                 print("** instance id missing **")
             else:
-                className = eval(eval(parsed_line[0]))
-                id = eval(eval(parsed_line[1]))
+                className = eval(parsed_line[0])
+                id = (eval(parsed_line[1]))
                 fs = FileStorage()
                 fs.reload()
                 all_reloaded = fs.all()

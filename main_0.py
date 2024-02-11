@@ -45,7 +45,6 @@ with open("tmp_console_main.py", "r") as file_i:
 
 import console
 
-
 """
  Create console
 """
@@ -73,13 +72,18 @@ def exec_command(my_console, the_command, last_lines = 1):
 """
  Tests
 """
-result = exec_command(my_console, "create")
+result = exec_command(my_console, "create BaseModel")
 if result is None or result == "":
-    print("FAIL: no output")
+    print("FAIL: No ID retrieved")
     
-search_str = "** class name missing **"
-if result != search_str:
-    print("FAIL: wrong message: \"{}\" instead of \"{}\"".format(result, search_str))
+model_id = result
+
+result = exec_command(my_console, "show BaseModel {}".format(model_id))
+if result is None or result == "":
+    print("FAIL: empty output")
+    
+if "[BaseModel]" not in result or model_id not in result:
+    print("FAIL: wrong output format: \"{}\"".format(result))
     
 print("OK", end="")
 
