@@ -31,7 +31,7 @@ class HBNBCommand(cmd.Cmd):
         try:
             if (len(parsed_line) == 0):
                 print("** class name missing **")
-            elif (len(parsed_line) < 2):
+            elif (len(parsed_line) <= 2):
                 instance = globals()[parsed_line[0]]()
                 print("** instance id missing **")
             else:
@@ -55,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
         try:
             if (len(parsed_line) == 0):
                 print("** class name missing **")
-            elif (len(parsed_line) < 2):
+            elif (len(parsed_line) <= 2):
                 instance = globals()[parsed_line[0]]()
                 print("** instance id missing **")
             else:
@@ -99,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
         try:
             if (len(parsed_line) == 0):
                 print("** class name missing **")
-            elif (len(parsed_line) < 2):
+            elif (len(parsed_line) <= 2):
                 instance = globals()[parsed_line[0]]()
                 print("** instance id missing **")
             else:
