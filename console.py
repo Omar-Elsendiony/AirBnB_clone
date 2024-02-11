@@ -29,7 +29,7 @@ class HBNBCommand(cmd.Cmd):
         """destroys the instance of the class given the id and classname"""
         parsed_line = parse(line)
         try:
-            if (len(parsed_line) == 0):
+            if (len(parsed_line)== 1):
                 print("** class name missing **")
             elif (len(parsed_line) <= 2):
                 instance = globals()[parsed_line[0]]()
@@ -53,7 +53,7 @@ class HBNBCommand(cmd.Cmd):
         """creates a new instance of the class with the provided name"""
         parsed_line = parse(line)
         try:
-            if (len(parsed_line) == 0):
+            if (len(parsed_line)== 1):
                 print("** class name missing **")
             elif (len(parsed_line) <= 2):
                 instance = globals()[parsed_line[0]]()
@@ -77,7 +77,7 @@ class HBNBCommand(cmd.Cmd):
         """creates a new instance of the class with the provided name"""
         parsed_line = parse(line)
         try:
-            if (len(parsed_line) == 0):
+            if (len(parsed_line)== 1):
                 print("** class name missing **")
             else:
                 className = parsed_line[0]
@@ -97,7 +97,7 @@ class HBNBCommand(cmd.Cmd):
         """updates the instance attribute with certain value"""
         parsed_line = parse(line)
         try:
-            if (len(parsed_line) == 0):
+            if (len(parsed_line)== 1):
                 print("** class name missing **")
             elif (len(parsed_line) <= 2):
                 instance = globals()[parsed_line[0]]()
