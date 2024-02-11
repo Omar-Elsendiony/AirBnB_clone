@@ -18,10 +18,11 @@ class HBNBCommand(cmd.Cmd):
         try:
             if (className == ""):
                 print("** class name missing **")
-            instance = globals()[className]()
-            if (className == "BaseModel"):
-                print(instance.id)
-                instance.save()
+            else:
+                instance = globals()[className]()
+                if (className == "BaseModel"):
+                    print(instance.id)
+                    instance.save()
         except KeyError:
             print("** class doesn't exist **")
 
