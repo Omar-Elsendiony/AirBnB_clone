@@ -19,6 +19,7 @@ if not os.path.exists(file_path):
 if os.path.exists(file_path):
     os.remove(file_path)
 
+
 """
  Backup console file
 """
@@ -43,6 +44,7 @@ with open("tmp_console_main.py", "r") as file_i:
                 file_o.write(line)
 
 import console
+
 
 """
  Create console
@@ -71,15 +73,14 @@ def exec_command(my_console, the_command, last_lines = 1):
 """
  Tests
 """
-result = exec_command(my_console, "create BaseModel")
-print(result)
+result = exec_command(my_console, "create")
 if result is None or result == "":
-    print("FAIL: No ID retrieved")
+    print("FAIL: no output")
     
-with open(file_path, "r") as file:
-    s_file = file.read()
-    if result not in s_file:
-        print("FAIL: New ID not in the JSON file")
+search_str = "** class name missing **"
+if result != search_str:
+    print("FAIL: wrong message: \"{}\" instead of \"{}\"".format(result, search_str))
+    
 print("OK", end="")
 
 shutil.copy("tmp_console_main.py", "console.py")
