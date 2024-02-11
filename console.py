@@ -11,7 +11,7 @@ from models.engine.file_storage import FileStorage
 
 class HBNBCommand(cmd.Cmd):
     """AirBNB commandline utility."""
-    prompt = '(hbnb) '
+    prompt = '(hbnb) ' #prompt 
 
     def do_create(self, line):
         """creates a new instance of the class with the provided name"""
