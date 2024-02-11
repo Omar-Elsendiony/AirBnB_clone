@@ -17,7 +17,6 @@ class HBNBCommand(cmd.Cmd):
         """creates a new instance of the class with the provided name"""
         parsed_line = parse(line)
         try:
-            print("me")
             if (len(parsed_line) == 0):
                 print("** class name missing **")
             else:
