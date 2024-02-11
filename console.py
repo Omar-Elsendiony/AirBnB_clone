@@ -21,7 +21,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** class name missing **")
             else:
                 className = parsed_line[0]
-                if (className == ""): print("** class name missing **")
+                if (className == ""): 
+                    print("** class name missing **")
                 else:
                     instance = globals()[className]()
                     if (className == "BaseModel"):
