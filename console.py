@@ -13,17 +13,20 @@ class HBNBCommand(cmd.Cmd):
     """AirBNB commandline utility."""
     prompt = '(hbnb) '
 
-    def do_create(self, className):
+    def do_create(self, line):
         """creates a new instance of the class with the provided name"""
+        parsed_str = parse(line)
         try:
-            className = eval(className)
-            if (className == ""):
+            if (len(parsed_str) == 0):
                 print("** class name missing **")
             else:
-                instance = globals()[className]()
-                if (className == "BaseModel"):
-                    print(instance.id)
-                    instance.save()
+                className = eval(className)
+                if (className == ""): print("** class name missing **")
+                else:
+                    instance = globals()[className]()
+                    if (className == "BaseModel"):
+                        print(instance.id)
+                        instance.save()
         except KeyError:
             print("** class doesn't exist **")
 
@@ -31,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
         """destroys the instance of the class given the id and classname"""
         parsed_line = parse(line)
         try:
-            if (len(parsed_line)== 1):
+            if (len(parsed_line) == 0):
                 print("** class name missing **")
             elif (len(parsed_line) <= 2):
                 instance = globals()[eval(eval(parsed_line[0]))]()
@@ -55,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
         """creates a new instance of the class with the provided name"""
         parsed_line = parse(line)
         try:
-            if (len(parsed_line)== 1):
+            if (len(parsed_line) == 0):
                 print("** class name missing **")
             elif (len(parsed_line) <= 2):
                 instance = globals()[eval(parsed_line[0])]()
@@ -79,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
         """creates a new instance of the class with the provided name"""
         parsed_line = parse(line)
         try:
-            if (len(parsed_line)== 1):
+            if (len(parsed_line) == 0):
                 print("** class name missing **")
             else:
                 className = eval(parsed_line[0])
@@ -99,7 +102,7 @@ class HBNBCommand(cmd.Cmd):
         """updates the instance attribute with certain value"""
         parsed_line = parse(line)
         try:
-            if (len(parsed_line)== 1):
+            if (len(parsed_line) == 0):
                 print("** class name missing **")
             elif (len(parsed_line) <= 2):
                 instance = globals()[eval(parsed_line[0])]()
