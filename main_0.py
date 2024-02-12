@@ -30,18 +30,18 @@ shutil.copy("console.py", "tmp_console_main.py")
 """
  Updating console to remove "__main__"
 """
-with open("tmp_console_main.py", "r") as file_i:
-    console_lines = file_i.readlines()
-    with open("console.py", "w") as file_o:
-        in_main = False
-        for line in console_lines:
-            if "__main__" in line:
-                in_main = True
-            elif in_main:
-                if "cmdloop" not in line:
-                    file_o.write(line.lstrip("    ")) 
-            else:
-                file_o.write(line)
+# with open("tmp_console_main.py", "r") as file_i:
+#     console_lines = file_i.readlines()
+#     with open("console.py", "w") as file_o:
+#         in_main = False
+#         for line in console_lines:
+#             if "__main__" in line:
+#                 in_main = True
+#             elif in_main:
+#                 if "cmdloop" not in line:
+#                     file_o.write(line.lstrip("    ")) 
+#             else:
+#                 file_o.write(line)
 
 import console
 
