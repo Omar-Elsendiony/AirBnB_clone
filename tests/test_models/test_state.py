@@ -5,8 +5,8 @@ import unittest
 class test_State(unittest.TestCase):
     def test_name(self):
         state = State()
-        state.name = None
-        self.assertNotIsInstance(state.name, str)
+        n = state.name
+        self.assertIsInstance(n, str)
 
     def test_save(self):
         u = State()
