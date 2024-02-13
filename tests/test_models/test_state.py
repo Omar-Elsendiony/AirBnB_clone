@@ -8,7 +8,9 @@ import unittest
 class test_State(unittest.TestCase):
     def test_name(self):
         state = State()
-        name = state.name
+        state.name = "California"
+        self.assertEqual(state.name,"California")
+
 
 
 if __name__ == '__main__':
