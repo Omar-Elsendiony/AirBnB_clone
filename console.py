@@ -85,19 +85,21 @@ class HBNBCommand(cmd.Cmd):
         """creates a new instance of the class with the provided name"""
         parsed_line = parse(line)
         try:
-            if (len(parsed_line) == 0):
-                print("** class name missing **")
-            else:
+            if (len(parsed_line) != 0):
                 className = parsed_line[0]
-                fs = FileStorage()
-                fs.reload()
-                all_reloaded = fs.all()
-                allinstances = []
-                for k, v in all_reloaded.items():
-                    classNameExtracted = k.split(".")[0]
+                instance = globals()[className]()
+            fs = FileStorage()
+            fs.reload()
+            all_reloaded = fs.all()
+            allinstances = []
+            for k, v in all_reloaded.items():
+                classNameExtracted = k.split(".")[0]
+                if (len(parsed_line) != 0):
                     if (className == classNameExtracted):
                         allinstances.append(v.__str__())
-                print(allinstances)
+                else:
+                    allinstances.append(v.__str__())
+            print(allinstances)
         except KeyError:
             print("** class doesn't exist **")
 
