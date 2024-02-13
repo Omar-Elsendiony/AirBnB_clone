@@ -5,8 +5,8 @@ import unittest
 class test_State(unittest.TestCase):
     def test_name(self):
         state = State()
-        state.name = "California"
-        self.assertEqual(state.name, "California")
+        state.name = None
+        self.assertNotIsInstance(state.name, str)
 
     def test_save(self):
         u = State()

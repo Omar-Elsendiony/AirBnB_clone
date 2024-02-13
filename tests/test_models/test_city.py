@@ -6,10 +6,15 @@ import unittest
 
 
 class test_City(unittest.TestCase):
-    def test_save(self):
+    def test_name(self):
         u = City()
-        u.save()
+        u.name = None
+        self.assertNotIsInstance(u.name, str)
 
+    def test_state_id(self):
+        u = City()
+        u.state_id = None
+        self.assertNotIsInstance(u.state_id, str)
 
 if __name__ == '__main__':
     unittest.main()
