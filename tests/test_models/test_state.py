@@ -6,9 +6,9 @@ import unittest
 
 
 class test_State(unittest.TestCase):
-    def test_save(self):
-        u = State()
-        u.save()
+    def test_name(self):
+        state = State()
+        name = state.name
 
 
 if __name__ == '__main__':
