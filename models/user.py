@@ -4,6 +4,7 @@
 """
 from models.base_model import BaseModel
 
+
 class User(BaseModel):
     """
      class User model which is meant for creating Users
