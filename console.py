@@ -42,10 +42,11 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
             else:
                 className = parsed_line[0]
-                id = (parsed_line[1])
+                id = parsed_line[1]
                 fs = FileStorage()
                 fs.reload()
                 all_reloaded = fs.all()
+                instance = globals()[(className)]()
                 obj_reloaded = all_reloaded.get("{}.{}".format(className, id))
                 if (obj_reloaded is None):
                     print("** no instance found **")

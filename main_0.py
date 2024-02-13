@@ -30,21 +30,20 @@ shutil.copy("console.py", "tmp_console_main.py")
 """
  Updating console to remove "__main__"
 """
-# with open("tmp_console_main.py", "r") as file_i:
-#     console_lines = file_i.readlines()
-#     with open("console.py", "w") as file_o:
-#         in_main = False
-#         for line in console_lines:
-#             if "__main__" in line:
-#                 in_main = True
-#             elif in_main:
-#                 if "cmdloop" not in line:
-#                     file_o.write(line.lstrip("    ")) 
-#             else:
-#                 file_o.write(line)
+with open("tmp_console_main.py", "r") as file_i:
+    console_lines = file_i.readlines()
+    with open("console.py", "w") as file_o:
+        in_main = False
+        for line in console_lines:
+            if "__main__" in line:
+                in_main = True
+            elif in_main:
+                if "cmdloop" not in line:
+                    file_o.write(line.lstrip("    ")) 
+            else:
+                file_o.write(line)
 
 import console
-
 
 """
  Create console
@@ -73,11 +72,17 @@ def exec_command(my_console, the_command, last_lines = 1):
 """
  Tests
 """
-result = exec_command(my_console, "create")
+result = exec_command(my_console, "create BaseModel")
+if result is None or result == "":
+    print("FAIL: No ID retrieved")
+    
+model_id = result
+
+result = exec_command(my_console, "destroy Fake {}".format(model_id))
 if result is None or result == "":
     print("FAIL: no output")
     
-search_str = "** class name missing **"
+search_str = "** class doesn't exist **"
 if result != search_str:
     print("FAIL: wrong message: \"{}\" instead of \"{}\"".format(result, search_str))
     
