@@ -71,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
                 fs = FileStorage()
                 fs.reload()
                 all_reloaded = fs.all()
-                # instance = globals()[parsed_line[0]]()
+                instance = globals()[parsed_line[0]]()
                 obj_reloaded = all_reloaded.\
                     get("{}.{}".format(className, id))
                 if (obj_reloaded is None):
@@ -115,6 +115,7 @@ class HBNBCommand(cmd.Cmd):
                 id = parsed_line[1]
                 fs = FileStorage()
                 fs.reload()
+                instance = globals()[parsed_line[0]]()
                 all_reloaded = fs.all()
                 obj_reloaded = all_reloaded.get("{}.{}".format(className, id))
                 if (obj_reloaded is None):
