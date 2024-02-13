@@ -20,7 +20,7 @@ class test_FileStorage(unittest.TestCase):
             bm.save()
             ids.append(bm.id)
             objs_by_id[bm.id] = bm
-    def test_file_path():
+    def test_file_path(self):
         fs = FileStorage()
         fs.__file_path = None
     
