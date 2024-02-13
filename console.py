@@ -26,9 +26,8 @@ class HBNBCommand(cmd.Cmd):
                     print("** class name missing **")
                 else:
                     instance = globals()[className]()
-                    if (className == "BaseModel"):
-                        print(instance.id)
-                        instance.save()
+                    print(instance.id)
+                    instance.save()
         except KeyError:
             print("** class doesn't exist **")
 
