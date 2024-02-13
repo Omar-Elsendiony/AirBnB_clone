@@ -1,7 +1,6 @@
 import sys
 
 from models.user import User
-from models.base_model import BaseModel
 import unittest
 
 
