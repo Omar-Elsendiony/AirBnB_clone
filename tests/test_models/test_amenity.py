@@ -11,7 +11,8 @@ class test_Amenity(unittest.TestCase):
 
     def test_name(self):
         u = Amenity()
-        u.save()
+        n = u.name
+        self.assertIsInstance(n, str)
 
 
 if __name__ == '__main__':
