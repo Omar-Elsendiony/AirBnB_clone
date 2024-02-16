@@ -19,6 +19,20 @@ class HBNBCommand(cmd.Cmd):
     """AirBNB commandline utility."""
     prompt = '(hbnb) ' #prompt 
 
+    def default(self, line):
+        line = line.split(" ")
+        splitted = line[0].split(".")
+        if (len(splitted) == 1): return
+        command = splitted[1]
+        className = str(splitted[0])
+        otherArgs = "" if (len(line) == 1) else line[1:]
+        argument = className + " " + otherArgs
+        try:
+            exec(f"self.do_{command}(argument)", locals())
+        except Exception as e:
+            pass
+        return
+
     def do_create(self, line):
         """creates a new instance of the class with the provided name"""
         parsed_line = parse(line)
