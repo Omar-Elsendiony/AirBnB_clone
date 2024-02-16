@@ -4,6 +4,7 @@ console module starts a console that takes user inputs by
 providing a prompt that waits for the input
 """
 import cmd
+import re
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
@@ -23,12 +24,17 @@ class HBNBCommand(cmd.Cmd):
         line = line.split(" ")
         splitted = line[0].split(".")
         if (len(splitted) == 1): return
-        command = splitted[1]
-        className = str(splitted[0])
-        otherArgs = "" if (len(line) == 1) else line[1:]
-        argument = className + " " + otherArgs
+        otherArgs = splitted[1]
+        className = splitted[0]
+        matched = re.search(r"(?<=\().*(?=\))", otherArgs)
+        matchedStr = matched.group(0) if (matched) else ""
+        matchedStr = className + matchedStr
+        command = re.search(r".*((?=\())", otherArgs)
+        if (command == None):
+            command = re.search(r".*((?=$))", otherArgs)
+            # print(command.match())
         try:
-            exec(f"self.do_{command}(argument)", locals())
+            exec(f"self.do_{command.group(0)}(matchedStr)", locals())
         except Exception as e:
             pass
         return
