@@ -21,14 +21,13 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) ' #prompt 
 
     def default(self, line):
-        line = line.split(" ")
-        splitted = line[0].split(".")
-        if (len(splitted) == 1): return
+        splitted = line.split(".")
         otherArgs = splitted[1]
         className = splitted[0]
         matched = re.search(r"(?<=\().*(?=\))", otherArgs)
-        matchedStr = matched.group(0) if (matched) else ""
+        matchedStr = " ".join(matched.group(0).split(",")) if (matched) else ""
         matchedStr = className + " " + matchedStr
+        # if (len(splitted) == 1): return
         command = re.search(r".*((?=\())", otherArgs)
         if (command == None):
             command = re.search(r".*((?=$))", otherArgs)
