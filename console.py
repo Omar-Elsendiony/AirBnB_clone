@@ -28,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
         className = splitted[0]
         matched = re.search(r"(?<=\().*(?=\))", otherArgs)
         matchedStr = matched.group(0) if (matched) else ""
-        matchedStr = className + matchedStr
+        matchedStr = className + " " + matchedStr
         command = re.search(r".*((?=\())", otherArgs)
         if (command == None):
             command = re.search(r".*((?=$))", otherArgs)
